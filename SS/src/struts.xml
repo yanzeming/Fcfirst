@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring" />
+    <package name="default" namespace="/" extends="struts-default">
+    <action name="test" class="cn.test.TestIndexAction">
+    	<result name="success">index.jsp</result>
+    </action>
+		<!-- 配置首页访问的Action -->
+		<action name="index" class="indexAction" method="execute">
+			<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		
+		<!-- 配置用户的Action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPageSuccess" > /WEB-INF/jsp/regist1.jsp</result>
+			<result name="registSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<result name="registInput"> /WEB-INF/jsp/regist1.jsp</result>
+			<result name="actionMsg"> /WEB-INF/jsp/msg.jsp</result>
+			<result name="loginPageSuccess">/WEB-INF/jsp/login.jsp</result>
+			<!-- <result name="loginSuccess" type="redirectAction">index</result> -->
+			<result name="loginSuccess" >/WEB-INF/jsp/login.jsp</result> 
+			<result name="loginInput"> /WEB-INF/jsp/login.jsp</result>
+			<result name="quitSuccess" type="redirectAction">index.action</result>
+		</action>
+		<action name="checkImg" class="checkImg"></action>
+    </package>
+
+</struts>
