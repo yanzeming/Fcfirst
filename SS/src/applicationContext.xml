@@ -53,6 +53,8 @@
 		
 	</bean>
 	
+	  
+	
 	<!-- 声明式事务管理 -->
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -76,6 +78,7 @@
 	</bean>
  	 <bean id="productAction" class="cn.itcast.shop.product.ProductAction">
 		<property name="productService" ref="productService"/>
+		<property name="categoryService" ref="categoryService" />
 	</bean>  
 	<bean id="categorySecondAction" class="cn.itcast.shop.categorysecond.CategorySecondAction">
 		<property name="categorySecondService" ref="categorySecondService"/>

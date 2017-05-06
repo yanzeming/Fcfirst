@@ -8,7 +8,7 @@
 	    		<generator class="native"></generator>
 	    	</id>
 	    	<property name="cname" column="cname"/>
-	    	<set name="categorySeconds">
+	    	<set name="categorySeconds" lazy="false" order-by="csid">
 	    		<key column="cid"/>
 	    		<one-to-many class="cn.itcast.shop.categorysecond.CategorySecond"/>
 	    	</set>

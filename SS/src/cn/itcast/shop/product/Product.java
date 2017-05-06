@@ -1,7 +1,7 @@
 package cn.itcast.shop.product;
 
 import java.util.Date;
-
+import cn.itcast.shop.categorysecond.*;
 public class Product {
 	private Integer pid;
 	private String pname;
@@ -13,6 +13,13 @@ public class Product {
 	private Integer is_hot;
 	private Date pdate;
 	private Integer csid;
+	private CategorySecond categorySecond;
+	public CategorySecond getCategorySecond() {
+		return categorySecond;
+	}
+	public void setCategorySecond(CategorySecond categorySecond) {
+		this.categorySecond = categorySecond;
+	}
 	public Integer getPid() {
 		return pid;
 	}

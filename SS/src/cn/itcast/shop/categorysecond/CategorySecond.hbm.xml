@@ -12,5 +12,10 @@
     		<many-to-one name="category" class="cn.itcast.shop.category.Category" column="cid">
     			
     		</many-to-one>
+    		
+    		  <set name="products">
+    			<key column="csid"></key>
+    			<one-to-many class="cn.itcast.shop.product.Product"/>
+    		</set>  
     	</class>
     </hibernate-mapping>

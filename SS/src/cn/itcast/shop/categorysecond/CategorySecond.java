@@ -1,10 +1,19 @@
 package cn.itcast.shop.categorysecond;
+import java.util.Set;
+
 import cn.itcast.shop.category.*;
+import cn.itcast.shop.product.*;
 public class CategorySecond {
 	private Integer csid;
 	private String csname;
 	private Category category;
-	
+	private Set<Product> products;
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	public Category getCategory() {
 		return category;
 	}

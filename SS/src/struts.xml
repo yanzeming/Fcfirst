@@ -29,6 +29,12 @@
 			<result name="quitSuccess" type="redirectAction">index.action</result>
 		</action>
 		<action name="checkImg" class="checkImg"></action>
+		
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="findByCidSuccess">/WEB-INF/jsp/list.jsp</result>
+			<result name="findByPidSuccess">/WEB-INF/jsp/desc.jsp</result>
+			<result name="findByCsidSuccess">/WEB-INF/jsp/cslist.jsp</result>
+		</action>
     </package>
 
 </struts>
