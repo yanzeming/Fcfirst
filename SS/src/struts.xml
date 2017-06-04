@@ -8,12 +8,24 @@
     <constant name="struts.devMode" value="false" />
 	<constant name="struts.objectFactory" value="spring" />
     <package name="default" namespace="/" extends="struts-default">
+    <interceptors>
+		<interceptor name="loginInterceptor" class="cn.itcast.shop.interceptor.LoginInterceptor"/>
+		<!-- <interceptor-stack name="myDefaultStack">
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</interceptor-stack> -->
+	</interceptors>
+    <global-results>
+		<result name="adminLogin">/admin/index.jsp</result>
+	</global-results>
+	
     <action name="test" class="cn.test.TestIndexAction">
     	<result name="success">index.jsp</result>
     </action>
 		<!-- 配置首页访问的Action -->
 		<action name="index" class="indexAction" method="execute">
 			<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
+			<result name="success">/WEB-INF/jsp/index.jsp</result>
 		</action>
 		
 		<!-- 配置用户的Action -->
@@ -23,17 +35,101 @@
 			<result name="registInput"> /WEB-INF/jsp/regist1.jsp</result>
 			<result name="actionMsg"> /WEB-INF/jsp/msg.jsp</result>
 			<result name="loginPageSuccess">/WEB-INF/jsp/login.jsp</result>
-			<!-- <result name="loginSuccess" type="redirectAction">index</result> -->
-			<result name="loginSuccess" >/WEB-INF/jsp/login.jsp</result> 
-			<result name="loginInput"> /WEB-INF/jsp/login.jsp</result>
+			 <result name="loginSuccess" type="redirectAction">index.action</result> 
+			<!-- <result name="loginFail" >/WEB-INF/jsp/login.jsp</result>  -->
+			<!-- <result name="loginInput" type> /WEB-INF/jsp/login.jsp</result> -->
 			<result name="quitSuccess" type="redirectAction">index.action</result>
+			<result name="findPassWordPageSuccess">WEB-INF/jsp/findPassWord.jsp</result>
+			<result name="updatePassWordSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<result name="submitFormTimeAfterTime">/WEB-INF/jsp/fail.jsp</result>
+			
+			<result name="adminFindAllSuccess">/admin/user/list.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">user_adminFindAll.action?page=1</result>
+			<result name="editSuccess">/admin/user/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">user_adminFindAll.action?page=1</result>
+			 <!-- <interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,delete,edit,update</param>
+			</interceptor-ref> 
+			<interceptor-ref name="defaultStack"></interceptor-ref>-->
 		</action>
 		<action name="checkImg" class="checkImg"></action>
-		
+		<action name="search_*" class="searchAction" method="{1}">
+			<result name="findByTestSuccess">/WEB-INF/jsp/lucenefindlist.jsp</result>
+			<result name="findByLuceneShowSuccess">/WEB-INF/jsp/lucenefindlist.jsp</result>
+		</action>
 		<action name="product_*" class="productAction" method="{1}">
 			<result name="findByCidSuccess">/WEB-INF/jsp/list.jsp</result>
 			<result name="findByPidSuccess">/WEB-INF/jsp/desc.jsp</result>
 			<result name="findByCsidSuccess">/WEB-INF/jsp/cslist.jsp</result>
+			
+			<result name="adminFindAllSuccess">/admin/product/list.jsp</result>
+			<result name="addPageSuccess">/admin/product/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">product_adminFindAll.action?page=1</result>
+			<result name="editSuccess">/admin/product/edit.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">product_adminFindAll.action?page=1</result>
+			<result name="updateSuccess" type="redirectAction">product_adminFindAll.action?page=1</result>
+			<result name="input" type="redirectAction">product_adminFindAll.action?page=1</result>
+			<!-- <interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,addPage,save,edit,delete,update</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+		</action>
+		
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addCartSuccess">WEB-INF/jsp/cart.jsp</result>
+			<result name="input">WEB-INF/jsp/cart.jsp</result>
+			<result name="removeCartSuccess">WEB-INF/jsp/cart.jsp</result>
+			<result name="claerCartSuccess">WEB-INF/jsp/cart.jsp</result>
+			<result name="mycart">WEB-INF/jsp/cart.jsp</result>
+		</action>
+		<action name="order_*" class="orderAction" method="{1}" >
+			<result name="saveOrderSuccess">WEB-INF/jsp/order.jsp</result>
+			<result name="ordermsg">WEB-INF/jsp/ordermsg.jsp</result>
+			<result name="input">WEB-INF/jsp/order.jsp</result>
+			<result name="findByUidSuccess">WEB-INF/jsp/orderlist.jsp</result>
+			<result name="findByOidSuccess">WEB-INF/jsp/order.jsp</result>
+			<result name="payOrderSuccess" type="redirectAction">order_findByUid.action</result>
+			
+			<result name="adminFindAllSuccess">/admin/order/list.jsp</result>
+			<result name="adminUpdateStateSuccess" type="redirectAction">order_adminFindAll.action?page=1</result>
+			<result name="adminFindAllNoStateSuccess" >/admin/order/list.jsp</result>
+			<result name="updateStateSuccess" type="redirectAction">order_findByUid.action</result>
+			<!-- <interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,adminUpdateState,adminFindAllNoState</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+		</action>
+		<action name="adminUser_*" class="adminUserAction" method="{1}">
+			<result name="loginfail" >/admin/index.jsp</result>
+			<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
+			<result name="input" type="redirect">/admin/index.jsp</result>
+			<!-- <interceptor-ref name="loginInterceptor">
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+		</action>
+		<action name="category_*" class="categoryAction" method="{1}">
+			<result name="adminFindAllSuccess">/admin/category/list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">category_adminFindAll.action</result>
+			<result name="deleteSuccess" type="redirectAction">category_adminFindAll.action</result>
+			<result name="editSuccess" >/admin/category/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">category_adminFindAll.action</result>
+			<!-- <interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,save,delete,edit,update</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+		</action>
+		<action name="categorySecond_*" class="categorySecondAction" method="{1}">
+			<result name="adminFindAllSuccess">/admin/categorysecond/list.jsp</result>
+			<result name="addPageSuccess">/admin/categorysecond/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">categorySecond_adminFindAll.action?page=1</result>
+			<result name="deleteSuccess" type="redirectAction">categorySecond_adminFindAll.action?page=1</result>
+			<result name="editSuccess">/admin/categorysecond/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">categorySecond_adminFindAll.action?page=1</result>
+			<!-- <interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,addPage,save,delete,edit,update</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
 		</action>
     </package>
 

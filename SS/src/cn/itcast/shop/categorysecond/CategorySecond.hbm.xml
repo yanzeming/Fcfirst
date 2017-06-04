@@ -9,7 +9,7 @@
     		</id>
     		<property name="csname" column="csname"/>
     		
-    		<many-to-one name="category" class="cn.itcast.shop.category.Category" column="cid">
+    		<many-to-one name="category" class="cn.itcast.shop.category.Category" column="cid" >
     			
     		</many-to-one>
     		

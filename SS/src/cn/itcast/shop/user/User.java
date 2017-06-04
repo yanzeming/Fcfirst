@@ -73,4 +73,11 @@ public class User  {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	@Override
+	public String toString() {
+		return "User [uid=" + uid + ", state=" + state + ", code=" + code + ", username=" + username + ", password="
+				+ password + ", name=" + name + ", sex=" + sex + ", addr=" + addr + ", email=" + email + ", phone="
+				+ phone + ", toString()=" + super.toString() + "]";
+	}
+	
 }

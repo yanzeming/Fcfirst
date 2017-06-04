@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ page import="cn.itcast.shop.Utils.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -151,7 +152,7 @@
 	function change(){
 		var img=document.getElementById("checkImg");
 		//alert(121);
-		img.src="${pageContext.request.contextPath}/checkImg.action?"+new Date().getTime();
+		img.src="${pageContext.request.contextPath}/checkImg.action?"+new Date();
 	}
 	window.codepass=0;
 	function checkCode(){
@@ -208,54 +209,10 @@
 </head>
 <body>
 	<div class="container header">
-		<div class="span5">
-			<div class="logo">
-				<a href="http://localhost:8080/mango/"> <img
-					src="${pageContext.request.contextPath}/image/renleipic_01/logo.gif"
-					alt="传智播客">
-				</a>
-			</div>
-		</div>
-		<div class="span9">
-			<div class="headerAd">
-				<img src="${pageContext.request.contextPath}/image/header.jpg"
-					width="320" height="50" alt="正品保障" title="正品保障">
-			</div>
-		</div>
-		<div class="span10 last">
-			<div class="topNav clearfix">
-				<ul>
-					<li id="headerLogin" class="headerLogin"
-						style="display: list-item;"><a href="${ pageContext.request.contextPath }/user_loginPage.action">登录</a>|</li>
-					<li id="headerRegister" class="headerRegister"
-						style="display: list-item;"><a href="./会员注册.htm">注册</a>|</li>
-					<li id="headerUsername" class="headerUsername"></li>
-					<li id="headerLogout" class="headerLogout"><a
-						href="./index.htm">[退出]</a>|</li>
-					<li><a>会员中心</a> |</li>
-					<li><a>购物指南</a> |</li>
-					<li><a>关于我们</a></li>
-				</ul>
-			</div>
-			<div class="cart">
-				<a href="./购物车.htm">购物车</a>
-			</div>
-			<div class="phone">
-				客服热线: <strong>96008/53277764</strong>
-			</div>
-		</div>
-		<div class="span24">
-			<ul class="mainNav">
-				<li><a href="./index.htm">首页</a> |</li>
-				<li><a href="./蔬菜分类.htm">定制套餐</a> |</li>
-				<li><a>安全频道</a> |</li>
-				<li><a>亿家卡</a> |</li>
-				<li><a>蔬菜基地</a> |</li>
-				<li><a>节气养生</a> |</li>
-				<li><a>便民服务</a> |</li>
-
-			</ul>
-		</div>
+		
+		<%@ include file="header.jsp" %>
+		 <%@ include file="menu.jsp" %>  
+</div>	
 	</div>
 	<div class="container register">
 		<div class="span24">
@@ -263,12 +220,16 @@
 				<div class="main clearfix">
 					<div class="title">
 						<strong>会员注册</strong>USER REGISTER
-
+				<%
+					String token=UUidUtils.getUUid();
+					session.setAttribute("token", token);
+				%>
 					</div>
 					<form id="registerForm"
 						action="${ pageContext.request.contextPath }/user_regist.action"
 						method="post" novalidate="novalidate"
 						onsubmit="return checkForm();">
+						<input type="hidden" name="token" value="<%=token%>"/>
 						<table>
 							<tbody>
 								<tr>

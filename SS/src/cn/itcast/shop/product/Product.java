@@ -77,6 +77,12 @@ public class Product {
 	public Integer getCsid() {
 		return csid;
 	}
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", market_price=" + market_price + ", shop_price="
+				+ shop_price + ", num=" + num + ", pdesc=" + pdesc + ", is_hot=" + is_hot+",csid="+csid
+				+  super.toString() + "]";
+	}
 	public void setCsid(Integer csid) {
 		this.csid = csid;
 	}

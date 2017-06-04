@@ -52,8 +52,31 @@ public class ProductDao extends HibernateDaoSupport{
 		return this.getHibernateTemplate().get(Product.class, pid);
 	}
 
-	
+	public Integer adminFindAll() {
+		List<Long> list=this.getHibernateTemplate().find("select count(*) from Product ");
+		return list.get(0).intValue();
+	}
 
-	
+	public List<Product> adminFindAllByPage(Integer begin, Integer limit) {
+		String hql="from Product";
+		return this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>
+			(hql, null,begin , limit));
+	}
 
+	public void save(Product model) {
+		this.getHibernateTemplate().save(model);
+	}
+
+	public void deleteByPid(Product p) {
+		this.getHibernateTemplate().delete(p);
+	}
+
+	public void update(Product update) {
+		this.getHibernateTemplate().update(update);
+	}
+
+	public List<Product> findAllProduct() {
+		List<Product> pList=this.getHibernateTemplate().find("from Product");
+		return pList;
+	}
 }

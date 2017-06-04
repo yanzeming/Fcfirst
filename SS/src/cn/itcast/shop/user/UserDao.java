@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import cn.itcast.shop.Utils.PageBean;
+import cn.itcast.shop.Utils.PageHibernateCallback;
+
 public class UserDao extends HibernateDaoSupport{
 
 	public void save(User user) {
@@ -38,6 +41,27 @@ public class UserDao extends HibernateDaoSupport{
 		List<User> list=this.getHibernateTemplate().find("from User where email=?", user.getEmail());
 		if(list.size()!=0) return list.get(0);
 		return null;
+	}
+
+	public List<User> adminFindByPage(Integer start, Integer limit) {
+		String hql="from User";
+		List<User> list=this.getHibernateTemplate().executeFind(new PageHibernateCallback<User>
+		(hql, null, start,limit));
+		return list;
+	}
+
+	public Integer findAllCount() {
+		List<Long> list=this.getHibernateTemplate().find("select count(*) from User" );
+		if(list.size()==0) return 0;
+		return list.get(0).intValue();
+	}
+
+	public User findByUid(Integer uid) {
+		return this.getHibernateTemplate().get(User.class, uid);
+	}
+
+	public void adminDeleteUser(User u) {
+		this.getHibernateTemplate().delete(u);
 	}
 	
 }

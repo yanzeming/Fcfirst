@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>传智商城</title>
+<title>电子商城</title>
 <link href="${pageContext.request.contextPath}/css/slider.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css"/>
@@ -12,19 +12,10 @@
 <body>
 
 <div class="container header">
-	<div class="span5">
-		<div class="logo">
-			<a href="./京华亿家/index.htm">
-				<img src="${pageContext.request.contextPath}/image/r___________renleipic_01/logo.gif" alt="传智播客"/>
-			</a>
-		</div>
-	</div>
-	<div class="span9">
-<div class="headerAd">
-	<img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
-</div>	</div>
+	 
 
-<%@ include file="header.jsp" %>
+ <%@ include file="header.jsp" %>
+
 		 <%@ include file="menu.jsp" %>  
 </div>	
 
@@ -53,8 +44,8 @@
 </div> -->
 						<ul class="tabContent" style="display: block;">
 							<s:iterator value="hotList">
-								<li> <%-- <s:property  value="image"/>  --%>
-									<a target="_blank"><img src="${pageContext.request.contextPath}/<s:property  value="image"/> " style="display: block;"></a>
+								<li> <%-- <s:property  value="pid"/>   --%>
+									<a href="${pageContext.request.contextPath}/product_findByPid.action?pid=<s:property  value="pid"/>" target="_blank"><img src="${pageContext.request.contextPath}/<s:property  value="image"/> " style="display: block;"></a>
 								</li>
 							</s:iterator>
 						</ul>
@@ -136,7 +127,7 @@
 						 <ul class="tabContent" style="display: block;">
 						 	<s:iterator value="newList">
 								<li><%-- <s:property value="image"/> --%>
-									<a target="_blank"><img src="${pageContext.request.contextPath}/<s:property  value="image"/>"  style="display: block;"></a>								
+									<a  href="${pageContext.request.contextPath}/product_findByPid.action?pid=<s:property  value="pid"/>" target="_blank"><img src="${pageContext.request.contextPath}/<s:property  value="image"/> " target="_blank"></a>								
 										
 								<li>
 							</s:iterator>

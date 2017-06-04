@@ -17,7 +17,7 @@
     		<property name="pdate" column="pdate"/>
     		<!-- <property name="csid" column="csid"/> -->
     		
-    	  <many-to-one name="categorySecond"  
+    	  <many-to-one name="categorySecond"  lazy="false"
     	  class="cn.itcast.shop.categorysecond.CategorySecond" column="csid" />
     			
     	</class>

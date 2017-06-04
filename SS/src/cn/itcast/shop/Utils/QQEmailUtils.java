@@ -19,9 +19,9 @@ public class QQEmailUtils {
      * @param text 发送内容
      */
 	//qq邮箱授权码   tdvbapvhwvmfbfbb
-	public static String username="1343497749@qq.com";//"913576695@qq.com";//"c1343497749@163.com";
-	public static String password="xrmhradzmrzhhbbe";//"tdvbapvhwvmfbfbb";//"cao123456";
-	public static void send_mail(String to,String code) throws MessagingException {
+	public static String username="1060238139@qq.com"; //username="1343497749@qq.com";//"913576695@qq.com";//"c1343497749@163.com";
+	public static String password="bikrhwaotdpvbebe";//password="xrmhradzmrzhhbbe";//"tdvbapvhwvmfbfbb";//"cao123456";
+	public static void send_mail(String to,String subject,String context) throws MessagingException {
 //创建连接对象 连接到
 		Properties properties = new Properties();
 //设置发送邮件的基本参数
@@ -59,14 +59,15 @@ public class QQEmailUtils {
 //设置收件人
 		message.setRecipient(Message.RecipientType.TO,new InternetAddress(to));
 //设置主题
-		message.setSubject("来自官网激活邮件");
+		message.setSubject(subject);//"来自官网激活邮件"
 //设置邮件正文  第二个参数是邮件发送的类型42  
 		
 		
 			
-		message.setContent("<h1>来自SHOP的官网激活邮件</h1><h3><a href='http://10.0.0.27:8080/"
-			+ "SS/user_active?code="+code+"'>http://10.0.0.27:8080/SS/"
-			+ "user_active?code="+code+"</a></h3>","text/html;charset=UTF-8");
+		message.setContent(context,"text/html;charset=UTF-8");
+		/*"<h1>来自SHOP的官网激活邮件</h1><h3><a href='http://10.0.0.27:8080/"
+		+ "SS/user_active?code="+code+"'>http://10.0.0.27:8080/SS/"
+		+ "user_active?code="+code+"</a></h3>"*/
 //发送一封邮件   
 		Transport.send(message);
     }
